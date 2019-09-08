@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <stdarg.h>
 #include <wifi.h>
+#include <ntpclock.h>
 #include <clock.h>
 
 void setup()
@@ -9,20 +10,14 @@ void setup()
     Serial.println("Starting...");
 
     WIFI::Initialize();
+    NTPClock::Initialize();
 }
-
-long timestamp = 1566934404; // Tuesday, August 27, 2019 7:33:24 PM UTC
 
 void loop()
 {
-    // put your main code here, to run repeatedly:
-
     Clock::ClearLeds();
 
-    Serial.print(timestamp);
-    Serial.print(": ");
-    Clock::TimestampToLEDS(timestamp, true);
+    Clock::TimestampToLEDS(NTPClock::Now(), true);
     Serial.println();
-    timestamp += random(86400); // Add random 0 - 24h period
     delay(1000);
 }

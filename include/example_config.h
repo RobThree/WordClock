@@ -8,3 +8,13 @@
 #define WIFI_PASSWD "WLAN AP password here"
 
 #endif
+
+#ifndef NTPCLOCK_H
+#define NTPCLOCK_H
+
+// Replace with your actual timezone:
+#define NTP_SERVER "pool.ntp.org"
+#define NTP_TIMEZONE "Europe/Amsterdam"
+#define NTP_SYNCINTERVAL 1800
+
+#endif
