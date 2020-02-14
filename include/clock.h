@@ -32,8 +32,10 @@ private:
 
 public:
     static void TimestampToLEDS(long unixDateTime, bool useOffset);
-    static void ShowWords(int argcount, ...);
     static void ClearLeds();
+
+private:
+    static void ShowWords(int argcount, ...);
 };
 
 #endif

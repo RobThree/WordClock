@@ -1,5 +1,5 @@
-#ifndef CLOCKWIFI_H
-#define CLOCKWIFI_H
+#ifndef WIFI_H
+#define WIFI_H
 
 class WIFI
 {

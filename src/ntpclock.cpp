@@ -5,12 +5,12 @@
 static Timezone tz;
 
 void NTPClock::Initialize() {
-    Serial.println("Initializing NTP");
+    Serial.printf("Initializing NTP (server: %s, interval: %ds, timezone: %s)\n", NTP_SERVER, NTP_SYNCINTERVAL, NTP_TIMEZONE);
     setServer(NTP_SERVER);
     setInterval(NTP_SYNCINTERVAL);
     waitForSync();
     tz.setLocation(F(NTP_TIMEZONE));
-    Serial.println("NTP initialized");
+    Serial.printf("NTP initialized\n");
 }
 
 long NTPClock::Now() {
