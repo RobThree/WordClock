@@ -7,6 +7,9 @@
 #define WIFI_SSID "Your SSID here"
 #define WIFI_PASSWD "WLAN AP password here"
 
+#define OTA_HOSTNAME "WordClock hostname"
+#define OTA_PASSWORD "OTA password here"
+
 // Replace with your actual timezone:
 #define NTP_SERVER "pool.ntp.org"
 #define NTP_TIMEZONE "Europe/Amsterdam"

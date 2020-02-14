@@ -31,7 +31,13 @@ class StatusBar {
             WS_NONE = CRGB::Black,
             WS_DISCONNECTED = CRGB::Red,
             WS_CONNECTING = CRGB::Yellow,
-            WS_CONNECTED = CRGB::Green
+            WS_CONNECTED = CRGB::Green,
+
+            WS_OTASTART = CRGB::Pink,
+            WS_OTAPROGRESS1 = CRGB::Blue,
+            WS_OTAPROGRESS2 = CRGB::LightBlue,
+            WS_OTACOMPLETE = CRGB::White,
+            WS_OTAERROR = CRGB::DarkRed
         };
 
         static void Initialize();

@@ -20,5 +20,24 @@ void WIFI::Initialize() {
         ESP.restart();
     }
     Serial.printf("Connected to %s\n", wifi_ssid);
-    StatusBar::SetWiFiStatus(StatusBar::WIFI_STATUS::WS_CONNECTED);
+    UpdateStatus();
+}
+
+void WIFI::UpdateStatus() {
+    StatusBar::SetWiFiStatus(MapWiFiStatus(WiFi.status()));
+}
+
+StatusBar::WIFI_STATUS WIFI::MapWiFiStatus(wl_status_t status) {
+  switch (status) {
+    // case WL_NO_SHIELD:          return StatusBar::WIFI_STATUS::WS_NONE;
+    // case WL_IDLE_STATUS:        return StatusBar::WIFI_STATUS::WS_NONE;
+    // case WL_NO_SSID_AVAIL:      return StatusBar::WIFI_STATUS::WS_NONE;
+    // case WL_SCAN_COMPLETED:     return StatusBar::WIFI_STATUS::WS_NONE;
+    case WL_CONNECTED:          return StatusBar::WIFI_STATUS::WS_CONNECTED;
+    // case WL_CONNECT_FAILED:     return StatusBar::WIFI_STATUS::WS_DISCONNECTED;
+    // case WL_CONNECTION_LOST:    return StatusBar::WIFI_STATUS::WS_DISCONNECTED;
+    // case WL_DISCONNECTED:       return StatusBar::WIFI_STATUS::WS_DISCONNECTED;
+    default:
+      return StatusBar::WIFI_STATUS::WS_DISCONNECTED;
+  }
 }

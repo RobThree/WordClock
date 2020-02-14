@@ -5,6 +5,7 @@
 #include <clock.h>
 #include <display.h>
 #include <statusbar.h>
+#include <ota.h>
 
 void setup()
 {
@@ -19,11 +20,14 @@ void setup()
     Display::Initialize();
     WIFI::Initialize();
     NTPClock::Initialize();
+    OTA::Initialize();
 }
 
 void loop()
 {
+    OTA::Handle();
     Clock::TimestampToDisplay(NTPClock::Now(), true);
+    WIFI::UpdateStatus();
     Display::Refresh();
     delay(100);
 }
