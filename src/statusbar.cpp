@@ -1,4 +1,5 @@
 #include <statusbar.h>
+#include <display.h>
 
 StatusBar::CLOCK_STATUS clockstatus;
 StatusBar::HEART_STATUS heartstatus;

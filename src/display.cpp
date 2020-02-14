@@ -5,8 +5,6 @@
 
 CRGB leds[DISPLAY_NUM_LEDS];
 
-
-
 void Display::Initialize() {
     FastLED.addLeds<DISPLAY_LED_TYPE, DISPLAY_LED_PIN, DISPLAY_COLOR_ORDER>(leds, DISPLAY_NUM_LEDS).setCorrection(TypicalLEDStrip);
     FastLED.setBrightness(DISPLAY_BRIGHTNESS);

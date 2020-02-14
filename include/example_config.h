@@ -13,7 +13,7 @@
 // Replace with your actual timezone:
 #define NTP_SERVER "pool.ntp.org"
 #define NTP_TIMEZONE "Europe/Amsterdam"
-#define NTP_SYNCINTERVAL 1800
+#define NTP_SYNCINTERVAL 1800       // In seconds
 
 // LED display properties
 #define DISPLAY_LED_PIN     2
@@ -29,4 +29,6 @@
 #define STATUSLED_ALARM     0x03
 #define STATUSLED_WIFI      0x04
 
+// Clock settings
+#define CLOCK_USEOFFSET     true    // Will round to the nearest 5 minutes instead of switching at exact time
 #endif
