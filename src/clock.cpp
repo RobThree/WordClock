@@ -27,7 +27,7 @@ byte(*WORDS[]) =
     /* 19: O'Clock */ (byte[]){ 0x70, 0x81, 0x72, 0x00 }
 };
 
-void Clock::TimestampToLEDS(long unixDateTime, bool useOffset = false)
+void Clock::TimestampToDisplay(long unixDateTime, bool useOffset = false)
 {
     // Strip date part, keep time, apply offset when desired
     int time = (unixDateTime + (useOffset ? 150 : 0)) % 86400;
@@ -59,11 +59,6 @@ void Clock::TimestampToLEDS(long unixDateTime, bool useOffset = false)
         ShowWords(1, HOUR);
 }
 
-void Clock::ClearLeds()
-{
-    //TODO: Clear all LEDS
-}
-
 void Clock::ShowWords(int argcount, ...)
 {
     va_list arguments;
@@ -72,10 +67,10 @@ void Clock::ShowWords(int argcount, ...)
     for (int i = 0; i < argcount; i++)
     {
         int wordindex = va_arg(arguments, int);
-        //TODO: Iterate the addresses and set the individual LEDs
+
         for (byte *c = WORDS[wordindex]; *c != 0; c++)
-            Serial.print((char)*c);
-        Serial.print(" ");
+            Display::SetLED(*c, CRGB::White);
+        
         va_end(arguments);
     }
 }

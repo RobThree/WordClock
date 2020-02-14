@@ -3,6 +3,7 @@
 #include <wifi.h>
 #include <ntpclock.h>
 #include <clock.h>
+#include <display.h>
 
 void setup()
 {
@@ -11,13 +12,15 @@ void setup()
 
     WIFI::Initialize();
     NTPClock::Initialize();
+    
+    Display::Initialize();
 }
 
 void loop()
 {
-    Clock::ClearLeds();
+    Display::Clear();
 
-    Clock::TimestampToLEDS(NTPClock::Now(), true);
-    Serial.println();
+    Clock::TimestampToDisplay(NTPClock::Now(), true);
+
     delay(1000);
 }

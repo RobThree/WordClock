@@ -2,6 +2,7 @@
 #define CLOCK_H
 
 #include <Arduino.h>
+#include <Display.h>
 
 class Clock
 {
@@ -31,8 +32,7 @@ private:
     };
 
 public:
-    static void TimestampToLEDS(long unixDateTime, bool useOffset);
-    static void ClearLeds();
+    static void TimestampToDisplay(long unixDateTime, bool useOffset);
 
 private:
     static void ShowWords(int argcount, ...);
