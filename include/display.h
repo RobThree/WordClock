@@ -8,6 +8,8 @@ class Display
 public:
     static void Initialize();
     static void SetLED(int index, CRGB color);
+    static void Refresh();
+private:
     static void Clear();
 };
 #endif

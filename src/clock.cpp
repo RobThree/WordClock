@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <stdarg.h>
 #include <clock.h>
+#include <statusbar.h>
 
 // Make sure each entry ends with a null terminator (0x00)!
 byte(*WORDS[]) =
@@ -33,6 +34,8 @@ void Clock::TimestampToDisplay(long unixDateTime, bool useOffset = false)
     int time = (unixDateTime + (useOffset ? 150 : 0)) % 86400;
     int hour = time / 3600;       // Determine the hour
     int part = time % 3600 / 300; // Determine which part of the hour (truncated to 5 minutes)
+
+    StatusBar::SetHeartStatus(unixDateTime & 0x01 ? StatusBar::HEART_STATUS::HS_BEAT : StatusBar::HEART_STATUS::HS_NONE);
 
     ShowWords(1, ITIS);
     switch (part)

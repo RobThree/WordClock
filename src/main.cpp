@@ -4,23 +4,26 @@
 #include <ntpclock.h>
 #include <clock.h>
 #include <display.h>
+#include <statusbar.h>
 
 void setup()
 {
     Serial.begin(460800);
-    Serial.println("Starting...");
+    Serial.println("Wait for it...");
 
+    delay(3000);    // Power-up safety delay
+    
+    Serial.println("Booting...");
+    
+    StatusBar::Initialize();
+    Display::Initialize();
     WIFI::Initialize();
     NTPClock::Initialize();
-    
-    Display::Initialize();
 }
 
 void loop()
 {
-    Display::Clear();
-
     Clock::TimestampToDisplay(NTPClock::Now(), true);
-
-    delay(1000);
+    Display::Refresh();
+    delay(100);
 }
