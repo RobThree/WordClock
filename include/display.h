@@ -11,5 +11,7 @@ public:
     static void Refresh();
 private:
     static void Clear();
+    static double GetBlinkValue(long time, double freq = .5, int min = 0, int max = 255);
+    static double Mapf(double x, double in_min, double in_max, double out_min, double out_max);
 };
 #endif

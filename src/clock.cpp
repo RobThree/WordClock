@@ -35,8 +35,6 @@ void Clock::TimestampToDisplay(long unixDateTime, bool useOffset = false)
     int hour = time / 3600;       // Determine the hour
     int part = time % 3600 / 300; // Determine which part of the hour (truncated to 5 minutes)
 
-    StatusBar::SetHeartStatus(unixDateTime & 0x01 ? StatusBar::HEART_STATUS::HS_BEAT : StatusBar::HEART_STATUS::HS_NONE);
-
     ShowWords(1, ITIS);
     switch (part)
     {

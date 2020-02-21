@@ -7,10 +7,10 @@
 static Timezone tz;
 
 void NTPClock::Initialize() {
-    Serial.printf("Initializing NTP (server: %s, interval: %ds, timezone: %s)\n", NTP_SERVER, NTP_SYNCINTERVAL, NTP_TIMEZONE);
+    Serial.printf("Initializing NTP (server: %s, interval: %ds, timezone: %s)\n", NTP_HOST, NTP_SYNCINTERVAL, NTP_TIMEZONE);
     StatusBar::SetClockStatus(StatusBar::CLOCK_STATUS::CS_SYNCING);
     Display::Refresh();
-    setServer(NTP_SERVER);
+    setServer(NTP_HOST);
     setInterval(NTP_SYNCINTERVAL);
     waitForSync();
     tz.setLocation(F(NTP_TIMEZONE));

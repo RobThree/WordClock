@@ -11,11 +11,6 @@ class StatusBar {
             CS_SYNCED = CRGB::Green
         };
 
-        enum HEART_STATUS {
-            HS_NONE = CRGB::Black,
-            HS_BEAT = CRGB::Red
-        };
-
         enum PARTY_STATUS {
             PS_NONE = CRGB::Black,
             PS_BIRTHDAY = CRGB::Yellow,
@@ -43,8 +38,6 @@ class StatusBar {
         static void Initialize();
         static void SetClockStatus(StatusBar::CLOCK_STATUS status);
         static CLOCK_STATUS GetClockStatus();
-        static void SetHeartStatus(HEART_STATUS status);
-        static HEART_STATUS GetHeartStatus();
         static void SetPartyStatus(PARTY_STATUS status);
         static PARTY_STATUS GetPartyStatus();
         static void SetAlarmStatus(ALARM_STATUS status);

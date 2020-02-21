@@ -22,12 +22,26 @@ void Display::Clear() {
 }
 
 void Display::Refresh() {
+    long time = millis();
+
     leds[STATUSLED_CLOCK] = StatusBar::GetClockStatus();
-    leds[STATUSLED_HEART] = StatusBar::GetHeartStatus();
+    leds[STATUSLED_HEART] = CHSV(0, 255, GetBlinkValue(time));
     leds[STATUSLED_PARTY] = StatusBar::GetPartyStatus();
     leds[STATUSLED_ALARM] = StatusBar::GetAlarmStatus();
     leds[STATUSLED_WIFI]  = StatusBar::GetWiFiStatus();
     
     FastLED.show();
     Clear();
+}
+
+// Returns a brightness for a given point in time and frequency so that blinks stay
+// in sync (as much as possible) with actual time.
+double Display::GetBlinkValue(long time, double freq, int min, int max)
+{
+    return Mapf(sin( time / (500 / (PI * freq))), -1, 1, min, max);
+}
+
+double Display::Mapf(double x, double in_min, double in_max, double out_min, double out_max)
+{
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }

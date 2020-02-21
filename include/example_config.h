@@ -11,7 +11,7 @@
 #define OTA_PASSWORD "OTA password here"
 
 // Replace with your actual timezone:
-#define NTP_SERVER "pool.ntp.org"
+#define NTP_HOST "pool.ntp.org"
 #define NTP_TIMEZONE "Europe/Amsterdam"
 #define NTP_SYNCINTERVAL 1800       // In seconds
 
@@ -30,5 +30,6 @@
 #define STATUSLED_WIFI      0x04
 
 // Clock settings
-#define CLOCK_USEOFFSET     true    // Will round to the nearest 5 minutes instead of switching at exact time
+#define CLOCK_USEROUNDING   true    // Will round to the nearest 5 minutes instead of switching at exact time
+#define CLOCK_FPS           25      // Number of (desired) frames per second, no guarantees
 #endif
