@@ -20,21 +20,27 @@ Because we use RGB leds any of the indicators can have multiple functions, as do
 - A [Wemos D1 mini](https://www.aliexpress.com/item/32651747570.html) (or a NodeMCU, ESP32, Raspberry pi)
 - At least 2m (115 LEDs minimum) of [60 LED/m WS2812B LED strip](https://www.aliexpress.com/item/2036819167.html) (IP30 will do)
 - A [5V DC power supply](https://www.aliexpress.com/item/32670505021.html) or [brick](https://www.aliexpress.com/item/33014935336.html) capable of delivering at least 7A or more
-- [A 470Ω resistor](https://www.aliexpress.com/item/32847047012.html)
-- [3 1000μF electrolytic capacitors](https://www.aliexpress.com/item/32909080992.html) with a voltage rating of 5V or higher
 
 According to the specs, a WS2812B draws 18W per meter at 60 LEDs per meter. That's 18W / 60LEDs = 0.3W per LED. That's 0.3W / 5V = 0.06A per LED. Given 115 LED's (10 rows of 11 LEDs + 5 status LEDs) we'll need at least 6.9A + some for the microcontroller and optional other parts.
 
+It's generally recommended to 'inject power' every 2.5 feet or every 75cm so we won't have 'yellowing' at the end of the LED strip and also won't be overloading our wiring.
+
+Since, normally, we won't be driving all LEDs at the same time at full brightness we do have some headroom in both the specs of the power supply and the power injection. You'll probably get along just fine with a 3A power supply and injecting power only at the beginning of the strip; however we like to err on the safe side, especially since we don't know what other uses we can think of for our clock in the future which might require lighting more, or even all, LEDs or driving additional circuitry as well.
+
 ### Optional parts
 
-To either make your life easier or to add additional features:
+To improve the circuit or to add additional features:
 
+- [A 470Ω resistor](https://www.aliexpress.com/item/32847047012.html)
+- [Some 1000μF electrolytic capacitors](https://www.aliexpress.com/item/32909080992.html) with a voltage rating at least 5V
 - [10 pairs of 3pin SM JST connector male/female for WS2812B LED Strip](https://www.aliexpress.com/item/1718558728.html)
 - [LDR](https://www.aliexpress.com/item/32760631393.html) or [light sensor](https://www.aliexpress.com/item/32550638947.html) to have the clock auto-adjust brightness
 - [DHT22](https://www.aliexpress.com/item/32802908424.html) to give your clock another purpose: temperature / humidity sensor
 - [Power switch](https://www.aliexpress.com/item/32832214619.html); not required (you can simply unplug) but neat
 - [A power jack](https://www.aliexpress.com/item/32414627873.html) of [some kind](https://www.aliexpress.com/item/4000198429452.html) if you opt for a power supply with a barrel connector
 - [A buzzer](https://www.aliexpress.com/item/32849730395.html) to give your clock an alarm function
+
+If your LEDstrip has no 'smoothing' capacitors 'built-in', you should consider putting one of them at every point where the power is injected into the strip. The 470Ω resistor is used for current limiting the data pin.
 
 ## Getting started
 
