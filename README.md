@@ -18,10 +18,12 @@ Because we use RGB leds any of the indicators can have multiple functions, as do
 
 - A Ribba (see [the idea](#the-idea))
 - A [Wemos D1 mini](https://www.aliexpress.com/item/32651747570.html) (or a NodeMCU, ESP32, Raspberry pi)
-- At least 2m (110 LEDs minimum) of [60 LED/m WS2812B LED strip](https://www.aliexpress.com/item/2036819167.html) (IP30 will do)
+- At least 2m (115 LEDs minimum) of [60 LED/m WS2812B LED strip](https://www.aliexpress.com/item/2036819167.html) (IP30 will do)
 - A [5V DC power supply](https://www.aliexpress.com/item/32670505021.html) or [brick](https://www.aliexpress.com/item/33014935336.html) capable of delivering at least 7A or more
+- [A 470Ω resistor](https://www.aliexpress.com/item/32847047012.html)
+- [3 1000μF electrolytic capacitors](https://www.aliexpress.com/item/32909080992.html) with a voltage rating of 5V or higher
 
-According to the specs, a WS2812B draws 18W per meter at 60 LEDs per meter. That's 18W / 60LEDs = 0.3W per LED. That's 0.3W / 5V = 0.06A per LED. Given 110 LED's (10 rows of 11 LEDs) we'll need at least 6.6A + some for the microcontroller and optional other parts.
+According to the specs, a WS2812B draws 18W per meter at 60 LEDs per meter. That's 18W / 60LEDs = 0.3W per LED. That's 0.3W / 5V = 0.06A per LED. Given 115 LED's (10 rows of 11 LEDs + 5 status LEDs) we'll need at least 6.9A + some for the microcontroller and optional other parts.
 
 ### Optional parts
 
