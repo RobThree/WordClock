@@ -38,10 +38,7 @@ void Display::Refresh() {
 // in sync (as much as possible) with actual time.
 double Display::GetBlinkValue(long time, double freq, int min, int max)
 {
-    return Mapf(sin( time / (500 / (PI * freq))), -1, 1, min, max);
-}
-
-double Display::Mapf(double x, double in_min, double in_max, double out_min, double out_max)
-{
-    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    // Scale a second to 1/256 and multiply by frequency, calculate the quadwave6 (fast sin approx.)
+    // and finally map to our desired range
+    return map(quadwave8(time * 0.256 * freq), 0, 255, min, max);   
 }
