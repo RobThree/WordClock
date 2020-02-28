@@ -38,7 +38,8 @@ void Display::Refresh() {
 // in sync (as much as possible) with actual time.
 double Display::GetBlinkValue(long time, double freq, int min, int max)
 {
-    // Scale a second to 1/256 and multiply by frequency, calculate the quadwave6 (fast sin approx.)
-    // and finally map to our desired range
+    // Scale a second to 256 'ticks'/sec and multiply by frequency, calculate the
+    // quadwave8 (fast sin approximation provided by FastLED library) and finally
+    // map to our desired range.
     return map(quadwave8(time * 0.256 * freq), 0, 255, min, max);   
 }
