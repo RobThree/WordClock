@@ -13,7 +13,8 @@ void NTPClock::Initialize() {
     setServer(NTP_HOST);
     setInterval(NTP_SYNCINTERVAL);
     waitForSync();
-    tz.setLocation(F(NTP_TIMEZONE));
+    if (!tz.setCache(0))
+        tz.setLocation(F(NTP_TIMEZONE));
     Serial.printf("NTP initialized\n");
     StatusBar::SetClockStatus(StatusBar::CLOCK_STATUS::CS_SYNCED);
     Display::Refresh();
