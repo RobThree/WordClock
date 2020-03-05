@@ -31,7 +31,7 @@ class StatusBar {
             WS_OTASTART = CRGB::Pink,
             WS_OTAPROGRESS1 = CRGB::Blue,
             WS_OTAPROGRESS2 = CRGB::LightBlue,
-            WS_OTACOMPLETE = CRGB::White,
+            WS_OTACOMPLETE = CRGB::HotPink,
             WS_OTAERROR = CRGB::DarkRed
         };
 

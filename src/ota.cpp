@@ -18,7 +18,6 @@ void OTA::Initialize() {
         Serial.println("\nEnd");
         StatusBar::SetWiFiStatus(StatusBar::WIFI_STATUS::WS_OTACOMPLETE);
         Display::Refresh();
-        delay(2000);    // Make sure the status can be seen
     });
     ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
         uint progresspercentage = (progress / (total / 100));
