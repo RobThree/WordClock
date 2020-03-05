@@ -34,7 +34,6 @@ void loop()
     // Main loop
     OTA::Handle();
     Clock::TimestampToDisplay(NTPClock::Now(), CLOCK_USEROUNDING);
-    WIFI::UpdateStatus();
     Display::Refresh();
     
     // Determine at what time the next frame should be ready and how long we should

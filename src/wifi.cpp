@@ -8,27 +8,50 @@
 const char* wifi_ssid = WIFI_SSID;
 const char* wifi_pass = WIFI_PASSWD;
 
-void WIFI::Initialize() {
-    Serial.printf("Connecting to %s...\n", wifi_ssid);
+WiFiEventHandler gotIpEventHandler, disconnectedEventHandler;
 
-    StatusBar::SetWiFiStatus(StatusBar::WIFI_STATUS::WS_CONNECTING);
-    Display::Refresh();
+void WIFI::Initialize() {
 
     WiFi.mode(WIFI_STA);
-    WiFi.begin(wifi_ssid, wifi_pass);
-    while (WiFi.waitForConnectResult() != WL_CONNECTED) {
-        Serial.printf("Connection to %s Failed! Rebooting...\n", wifi_ssid);
-        StatusBar::SetWiFiStatus(StatusBar::WIFI_STATUS::WS_DISCONNECTED);
-        Display::Refresh();
+
+    // Update status when we get a connection
+    gotIpEventHandler = WiFi.onStationModeGotIP([](const WiFiEventStationModeGotIP& event)
+    {
+        Serial.printf("Station connected, IP: %s", WiFi.localIP().toString().c_str());
+        WIFI::UpdateStatus();
+    });
+
+    // Reconnect on disconnect
+    disconnectedEventHandler = WiFi.onStationModeDisconnected([](const WiFiEventStationModeDisconnected& event)
+    {
+        Serial.println("Station disconnected");
+        WIFI::UpdateStatus();
+        delay(5000);
+        Connect();
+    });
+    
+    // Now connect
+    Connect();
+
+    // On initial startup we want to block before we return
+    if (WiFi.waitForConnectResult(WIFI_CONNECTTIMEOUT) != WL_CONNECTED) {
+        WIFI::UpdateStatus();
+        Serial.println("Unable to connect");
         delay(5000);
         ESP.restart();
     }
-    Serial.printf("Connected to %s\n", wifi_ssid);
-    UpdateStatus();
+}
+
+void WIFI::Connect() {
+    StatusBar::SetWiFiStatus(StatusBar::WIFI_STATUS::WS_CONNECTING);
+    Display::Refresh();
+    Serial.printf("Connecting to %s...\n", wifi_ssid);
+    WiFi.begin(wifi_ssid, wifi_pass);
 }
 
 void WIFI::UpdateStatus() {
     StatusBar::SetWiFiStatus(MapWiFiStatus(WiFi.status()));
+    Display::Refresh();
 }
 
 StatusBar::WIFI_STATUS WIFI::MapWiFiStatus(wl_status_t status) {

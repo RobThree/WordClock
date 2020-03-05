@@ -8,8 +8,9 @@ class WIFI
 {
 public:
     static void Initialize();
-    static void UpdateStatus();
 private:
+    static void Connect();
+    static void UpdateStatus();
     static StatusBar::WIFI_STATUS MapWiFiStatus(wl_status_t status);
 };
 #endif

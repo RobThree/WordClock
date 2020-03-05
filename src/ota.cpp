@@ -18,11 +18,15 @@ void OTA::Initialize() {
         Serial.println("\nEnd");
         StatusBar::SetWiFiStatus(StatusBar::WIFI_STATUS::WS_OTACOMPLETE);
         Display::Refresh();
+        delay(2000);
+        WiFi.disconnect(true);
     });
     ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
         uint progresspercentage = (progress / (total / 100));
         Serial.printf("Progress: %u%%\r", progresspercentage);
-        StatusBar::SetWiFiStatus(progresspercentage && 0x01 ? StatusBar::WIFI_STATUS::WS_OTAPROGRESS1 : StatusBar::WIFI_STATUS::WS_OTAPROGRESS2);
+        for (int i=0;i< map(progresspercentage, 0, 100, DISPLAY_NUM_STATUSLEDS, DISPLAY_NUM_LEDS);i++)
+            Display::SetLED(i, CHSV(map(progresspercentage, 0, 100, 0, 255), 255, 255));
+        StatusBar::SetWiFiStatus(StatusBar::WIFI_STATUS::WS_OTAPROGRESS);
         Display::Refresh();
     });
     ArduinoOTA.onError([](ota_error_t error) {
