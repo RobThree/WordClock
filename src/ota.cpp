@@ -8,6 +8,7 @@ void OTA::Initialize() {
     Serial.println("Initializing OTA");
     ArduinoOTA.setHostname(OTA_HOSTNAME);
     ArduinoOTA.setPassword((const char *)OTA_PASSWORD);
+    ArduinoOTA.setPort(OTA_PORT);
     ArduinoOTA.onStart([]() {
         Serial.println("Start");
         StatusBar::SetWiFiStatus(StatusBar::WIFI_STATUS::WS_OTASTART);

@@ -4,15 +4,16 @@
 #define CONFIG_H
 
 // Replace with your actual SSID and password:
-#define WIFI_SSID "Your SSID here"
-#define WIFI_PASSWD "WLAN AP password here"
+#define WIFI_SSID       "Your SSID here"
+#define WIFI_PASSWD     "WLAN AP password here"
 
-#define OTA_HOSTNAME "WordClock hostname"
-#define OTA_PASSWORD "OTA password here"
+#define OTA_HOSTNAME    "wordclock"
+#define OTA_PASSWORD    "my_ota_secret" // See example_env_secrets.ini / env_secrets.ini
+#define OTA_PORT        8266
 
 // Replace with your actual timezone:
-#define NTP_HOST "pool.ntp.org"
-#define NTP_TIMEZONE "Europe/Amsterdam"
+#define NTP_HOST        "pool.ntp.org"
+#define NTP_TIMEZONE    "Europe/Amsterdam"
 #define NTP_SYNCINTERVAL 1800       // In seconds
 
 // LED display properties
