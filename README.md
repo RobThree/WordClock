@@ -60,7 +60,7 @@ To improve the circuit or to add additional features:
 
 ** If your LEDstrip has no 'smoothing' capacitors 'built-in', you should consider putting one of them at every point where the power is injected into the strip. The 470Ω resistor is used for current limiting the data pin. If you opt for an LDR you'll need the 10KΩ resistor for a voltage divider.
 
-# Build instructions
+## Build instructions
 
 TODO
 
