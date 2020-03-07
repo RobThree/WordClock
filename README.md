@@ -1,6 +1,7 @@
 # WordClock
+![Logo](design/logo/logo.gif)
 
-Hobby project building a word clock with friends. Features are still being debated, this is very much a work in progress.
+Hobby project building a word clock with friends. Features are still being debated, design is still being tweaked, software is still being improved, hardware is still being changed. This is very much a work in progress.
 
 # Table of Contents
 * [The idea](#the-idea)
