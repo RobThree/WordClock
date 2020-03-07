@@ -13,8 +13,10 @@ long frameduration;
 void setup()
 {
     Serial.begin(460800);
-    Serial.println("Wait for it...");
     Serial.println("Booting...");
+
+    pinMode(DISPLAY_LED_PIN, OUTPUT);
+    pinMode(LDR_PIN, INPUT);
 
     // Calculate frame duration (in milliseconds) once, so we don't need to keep doing this
     frameduration = 1000 / CLOCK_FPS;

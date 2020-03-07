@@ -7,7 +7,7 @@ CRGB leds[DISPLAY_NUM_LEDS];
 
 void Display::Initialize() {
     FastLED.addLeds<DISPLAY_LED_TYPE, DISPLAY_LED_PIN, DISPLAY_COLOR_ORDER>(leds, DISPLAY_NUM_LEDS).setCorrection(TypicalLEDStrip);
-    FastLED.setBrightness(DISPLAY_BRIGHTNESS);
+    FastLED.setBrightness(LDR_DARK);
     Clear();
     Refresh();
 }
@@ -24,6 +24,8 @@ void Display::Clear() {
 
 void Display::Refresh() {
     long time = millis();
+
+    FastLED.setBrightness(map(analogRead(LDR_PIN), 0, 1024, LDR_DARK, LDR_LIGHT));
 
     leds[STATUSLED_CLOCK] = StatusBar::GetClockStatus();
     leds[STATUSLED_HEART] = CHSV(0, 255, GetBlinkValue(time));

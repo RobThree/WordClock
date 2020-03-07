@@ -15,15 +15,20 @@
 // Replace with your actual timezone:
 #define NTP_HOST        "pool.ntp.org"
 #define NTP_TIMEZONE    "Europe/Amsterdam"
-#define NTP_SYNCINTERVAL 1800       // In seconds
+#define NTP_SYNCINTERVAL 1800           // In seconds
 
 // LED display properties
-#define DISPLAY_LED_PIN         2
+#define DISPLAY_LED_PIN         D2
 #define DISPLAY_NUM_LEDS        115
 #define DISPLAY_NUM_STATUSLEDS  5
-#define DISPLAY_BRIGHTNESS      64
 #define DISPLAY_LED_TYPE        WS2812B
 #define DISPLAY_COLOR_ORDER     GRB
+
+// LDR settings
+#define LDR_PIN                 A0
+#define LDR_DARK                64      // Brightness for dark environment
+#define LDR_LIGHT               255     // Brightness for bright light environment
+#define LDR_FADE_TIME           10000   // How long to take when adjusting brightness (in ms)
 
 // Define status LED indices
 #define STATUSLED_CLOCK     0x00
