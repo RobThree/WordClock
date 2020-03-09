@@ -43,13 +43,14 @@ In normal operation about 20~25 LEDs will be on at the same time, which should d
 
 To improve the circuit or to add additional features:
 
+- Although I haven't experienced any problems, a logic level shifter ([74AHCT125](https://www.aliexpress.com/item/4000580459936.html)) _may_ be required to shift the 3.3V signal to the LED strip to 5V
 - [A breadboard](https://www.aliexpress.com/item/32256273855.html) to help out during the build
 - [D1 Protoboard shield](https://www.aliexpress.com/item/32790791836.html) to put all components on
 - [5 Spade terminal connectors](https://www.aliexpress.com/item/32985520928.html) to hook up the powersupply (better than clamping the wire, but still optional) *
 - [A short length of 0.82mm² / 18 AWG wire](https://www.aliexpress.com/item/4000037800462.html) to provide power to the LED strip, 50 cm should be more than sufficient
 - [Heatshrink](https://www.aliexpress.com/item/32788409697.html) to properly isolate your wire solderjoints
 - [Projectbox](https://www.aliexpress.com/item/32889586884.html) to put the microcontroller and other components in
-- [A 470Ω resistor](https://www.aliexpress.com/item/32847047012.html) to current-limit the signal pin to the LED strip
+- [A 220Ω-470Ω resistor](https://www.aliexpress.com/item/32847047012.html) to prevent echo/noise on the LED strip data line and to current-limit the signal pin
 - [Some 1000μF electrolytic capacitors](https://www.aliexpress.com/item/32909080992.html) with a voltage rating at least 5V if your LED strip doesn't have built-in capacitors **
 - [10 pairs of 3pin SM JST connector male/female for WS2812B LED Strip](https://www.aliexpress.com/item/1718558728.html)
 - [An LDR](https://www.aliexpress.com/item/32760631393.html) with a [A 10KΩ resistor](https://www.aliexpress.com/item/32847047012.html) or [light sensor](https://www.aliexpress.com/item/32550638947.html) to have the clock auto-adjust brightness
