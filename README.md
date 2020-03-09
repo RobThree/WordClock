@@ -43,7 +43,7 @@ In normal operation about 20~25 LEDs will be on at the same time, which should d
 
 To improve the circuit or to add additional features:
 
-- Although I haven't experienced any problems, a logic level shifter ([74AHCT125](https://www.aliexpress.com/item/4000580459936.html)) _may_ be required to shift the 3.3V signal to the LED strip to 5V
+- Although I haven't experienced any problems, a logic level shifter ([74HCT245](https://www.aliexpress.com/item/4000580459936.html)) [_may_ be required](https://forums.adafruit.com/viewtopic.php?f=47&t=47420&sid=6f6ece936d65e8158713022c7ed27734#p238463) to shift the 3.3V signal to the LED strip to 5V
 - [A breadboard](https://www.aliexpress.com/item/32256273855.html) to help out during the build
 - [D1 Protoboard shield](https://www.aliexpress.com/item/32790791836.html) to put all components on
 - [5 Spade terminal connectors](https://www.aliexpress.com/item/32985520928.html) to hook up the powersupply (better than clamping the wire, but still optional) *
