@@ -43,7 +43,7 @@ In normal operation about 20~25 LEDs will be on at the same time, which should d
 
 To improve the circuit or to add additional features:
 
-- Although I haven't experienced any problems, a logic level shifter ([74HCT245](https://www.aliexpress.com/item/32859131651.html)) [_may_ be required](https://forums.adafruit.com/viewtopic.php?f=47&t=47420&sid=6f6ece936d65e8158713022c7ed27734#p238463) to shift the 3.3V signal to the LED strip to 5V
+- Although I haven't experienced any problems, a logic level shifter ([74HCT245](https://www.aliexpress.com/item/32859131651.html)) [_may_](https://happyinmotion.com/?p=1247) be [required](https://forums.adafruit.com/viewtopic.php?f=47&t=47420&sid=6f6ece936d65e8158713022c7ed27734#p238463) to shift the 3.3V signal to the LED strip to 5V
 - [A breadboard](https://www.aliexpress.com/item/32256273855.html) to help out during the build
 - [D1 Protoboard shield](https://www.aliexpress.com/item/32790791836.html) to put all components on
 - [5 Spade terminal connectors](https://www.aliexpress.com/item/32985520928.html) to hook up the powersupply (better than clamping the wire, but still optional) *
@@ -52,10 +52,10 @@ To improve the circuit or to add additional features:
 - [Projectbox](https://www.aliexpress.com/item/32889586884.html) to put the microcontroller and other components in
 - [A 220Ω-470Ω resistor](https://www.aliexpress.com/item/32847047012.html) to prevent echo/noise on the LED strip data line and to current-limit the signal pin
 - [Some 1000μF electrolytic capacitors](https://www.aliexpress.com/item/32909080992.html) with a voltage rating at least 5V if your LED strip doesn't have built-in capacitors **
-- [10 pairs of 3pin SM JST connector male/female for WS2812B LED Strip](https://www.aliexpress.com/item/1718558728.html)
+- [5 pairs of 3pin SM JST connector male/female for WS2812B LED Strip](https://www.aliexpress.com/item/1718558728.html)
 - [An LDR](https://www.aliexpress.com/item/32760631393.html) with a [A 10KΩ resistor](https://www.aliexpress.com/item/32847047012.html) or [light sensor](https://www.aliexpress.com/item/32550638947.html) to have the clock auto-adjust brightness
 - [DHT22](https://www.aliexpress.com/item/32802908424.html) to give your clock another purpose: temperature / humidity sensor
-- [Power switch](https://www.aliexpress.com/item/32832214619.html) or [inline power switch](https://www.aliexpress.com/item/32907410798.html); not required (you can simply unplug) but neat
+- [Power switch](https://www.aliexpress.com/item/32832214619.html) or [inline power switch](https://www.aliexpress.com/item/32907410798.html); not required (you can simply unplug)
 - [A buzzer](https://www.aliexpress.com/item/32849730395.html) to give your clock an alarm function
 
 \* Make sure you order the correct size for the terminal screws on your powersupply. For M3.5 screws order SV 1.25-3.5 if you can, else round up to SV 1.25-4
