@@ -4,6 +4,10 @@
 #include <statusbar.h>
 
 CRGB leds[DISPLAY_NUM_LEDS];
+long nextldrreading = 0;
+long lastldrreading = 0;
+uint8_t targetbrightness = LDR_LIGHT;
+uint8_t lastbrightness = 0;
 
 void Display::Initialize() {
     FastLED.addLeds<DISPLAY_LED_TYPE, DISPLAY_LED_PIN, DISPLAY_COLOR_ORDER>(leds, DISPLAY_NUM_LEDS).setCorrection(TypicalLEDStrip);
@@ -22,10 +26,18 @@ void Display::Clear() {
         SetLED(i, CRGB::Black);
 }
 
+
 void Display::Refresh() {
     long time = millis();
 
-    FastLED.setBrightness(map(analogRead(LDR_PIN), 0, 1024, LDR_DARK, LDR_LIGHT));
+    if (time >= nextldrreading) {
+        lastldrreading = time;
+        nextldrreading = lastldrreading + LDR_FADE_TIME;
+        lastbrightness = FastLED.getBrightness();
+        targetbrightness = map(analogRead(LDR_PIN), 0, 1024, LDR_DARK, LDR_LIGHT);
+    }
+
+    FastLED.setBrightness(map(time, lastldrreading, nextldrreading, lastbrightness, targetbrightness));
 
     leds[STATUSLED_CLOCK] = StatusBar::GetClockStatus();
     leds[STATUSLED_HEART] = CHSV(0, 255, GetBlinkValue(time));
