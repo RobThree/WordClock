@@ -68,9 +68,19 @@ TODO
 
 ## Getting started with the software
 
-Built with [PlatformIO](https://platformio.org/)
+Built with VS Code and [PlatformIO](https://platformio.org/); download and instructions [here](https://platformio.org/install/ide?install=vscode).
 
-Read the instructions in [include/example_config.h](include/example_config.h)
+**Below procedure is only a temporary thing, we will provide a much better procedure and experience in the future**
+
+To get started you'll initially need to flash the Wemos over USB ("serial") first providing the SSID and password for your WiFi network. Start with copying `example_env_secrets.ini` to `env_secrets.ini`; this contains your OTA-password (which, by default, is "`my_ota_secret`"). Next copy `src\example_config.h` to `src\config.h`. At the very least change `WIFI_SSID` and `WIFI_PASSWD`. Also make sure you enter a known, good, NTP host; if `pool.ntp.org` doesn't work for you (I personally experience some unexplained problems at times), you can try `time.google.com`, `time.windows.com`, `time.cloudflare.com`, `time.apple.com` or any other NTP server (maybe even your ISP's time server or maybe even LAN time server like your NAS etc. which may provide an NTP service).
+
+The `OTA_HOSTNAME` is your clock's name and `OTA_PASSWORD` is, you guessed it, your clock's OTA password. Make sure the password matches the password in `env_secrets.ini`. Your clock will be reachable as `wordclock.local` (see [mDNS](https://en.wikipedia.org/wiki/.local#mDNS_implementations)).
+
+Next, open `platformio.ini`, and make sure the `default_envs` is set to `d1_mini_serial` (NOT `d1_mini_ota`). Set the `upload_port` value to your clock's name (`<clockname>.local`). Now connect your Wemos to USB. Finally, click the 'Upload' button in the toolbar in the very bottom of VSCode (the arrow pointing to the right, next to the checkmark). The project should compile and then be flashed to the μC. Wait for it to complete. And wait for it to reboot. Keep it connected; you should be able to see the clock booting and connecting to WiFi by watching the serial monitor (the 'plug' button, in the same bottom toolbar of VSCode). If you're too late, just press the reset button on the side of the Wemos. Make sure the Wemos connects to WiFi (the WiFi symbol should turn green and you should be able to see confirmation in the serial monitor). You should see 'Station connected, IP: x.x.x.x'. Note the IP.
+
+If the clock connects to WiFi correctly, you can unplug the USB lead and plug the clock into mains. From now on, you can update 'OTA'. Confirm you can ping your clock over WiFi (`ping <clockname>.local` or `ping x.x.x.x` where `x.x.x.x` is the IP you noted earlier). If you get a ping reply (make sure it's stable, not intermittently losing packets) you're ready to flash 'OTA'. Don't worry; when an OTA update fails, the clock will keep running the previous version; should you 'brick' the clock you should always be able to (re)flash using the USB method.
+
+To flash OTA you need to open `platform.io` again and change `default_envs` back from `d1_mini_serial` to `d1_mini_ota`. Verify again the `upload_port` is set to `<clockname>.local` or, if that doesn't work, your clock's IP. You can now click the upload button in the bottom toolbar (the arrow pointing right) and the update should be sent 'OTA'. From now on, you can make changes just by clicking the upload button every time you made a change.
 
 ## FAQ
 
