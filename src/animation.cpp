@@ -40,7 +40,6 @@ void Animation::SetAnimation(String url) {
             uint16_t height = (buffer[5] << 8) + buffer[4];
 
             for (int i = 0; i < frameCount; i++) {
-                Serial.printf("frame %d...\r\n", i);
                 // offset = number of frames, times 110 pixels, times 3 bytes per pixel, plus six header bytes, plus two header bytes per frame
                 int offset = i * 110 * 3 + 6 + ((i + 1) * 2);
                 for (int y = 0; y < height; y++) {
@@ -58,8 +57,6 @@ void Animation::SetAnimation(String url) {
                         }
                     }
                 }
-                Serial.printf("frame %d done!\r\n", i);
-                delay(1000);
             }
         }
     }
