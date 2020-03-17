@@ -21,8 +21,6 @@ AnimationFrame frames[60];
 
 
 void Animation::SetAnimation(String url) {
-    Serial.println("Setting animation...");
-    delay(1000);
     // fixed frametime, for now
     // right now the delay (16 bytes) isn't loaded and is included in the offset.
     frameTime = 250;
