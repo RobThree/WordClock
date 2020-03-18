@@ -16,6 +16,10 @@ void Display::Initialize() {
     Refresh();
 }
 
+uint8_t Display::GetRows() { return DISPLAY_ROWS; }
+uint8_t Display::GetCols() { return DISPLAY_COLS; }
+uint8_t Display::GetTotalScreenLeds() { return DISPLAY_NUM_LEDS_SCREEN; }
+
 CRGB Display::GetLED(uint8_t index) {
     if (CheckBounds(index))
         return leds[MapLED(index)];

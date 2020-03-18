@@ -29,12 +29,12 @@ void setup()
     OTA::Initialize();
 
     // Example animations
-    // Animation::SetAnimation("http://xs4any.nl/marios/spiral.bin");
-    // Animation::SetAnimation("http://xs4any.nl/marios/testscreen.bin");
-    // Animation::SetAnimation("http://xs4any.nl/marios/mario.bin");
-    // Animation::SetAnimation("http://xs4any.nl/marios/hearts.bin");
-    // Animation::SetAnimation("http://xs4any.nl/marios/fireworks.bin");
-    // Animation::SetAnimation("http://xs4any.nl/marios/matrix.bin");
+    // Animation::Initialize("http://xs4any.nl/marios/spiral.bin");
+    // Animation::Initialize("http://xs4any.nl/marios/testscreen.bin");
+    // Animation::Initialize("http://xs4any.nl/marios/mario.bin");
+    // Animation::Initialize("http://xs4any.nl/marios/hearts.bin");
+    // Animation::Initialize("http://xs4any.nl/marios/fireworks.bin");
+    // Animation::Initialize("http://xs4any.nl/marios/matrix.bin");
 }
 
 void loop()

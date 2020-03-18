@@ -9,6 +9,7 @@ uint16_t currentFrame = 0;
 uint16_t frameTime = 1000;
 uint32_t lastTime = 0;
 uint8_t data = 0;
+uint8_t totalleds;
 
 #define max(a,b) ((a)>(b)?(a):(b))
 
@@ -20,7 +21,9 @@ typedef struct
 AnimationFrame frames[60];
 
 
-void Animation::SetAnimation(String url) {
+void Animation::Initialize(String url) {
+    totalleds = Display::GetTotalScreenLeds();
+
     // Fixed frametime, for now
     // Right now the delay (16 bytes) isn't loaded and is included in the offset.
     frameTime = 250;
@@ -63,7 +66,7 @@ void Animation::SetAnimationFrame(uint32_t time) {
         return;
     }
 
-    for (uint8_t i = 0; i < DISPLAY_NUM_LEDS_SCREEN; i++)
+    for (uint8_t i = 0; i < totalleds; i++)
         Display::SetLED(i, frames[currentFrame].pixels[i]);
 
     // Wait until frametime is passed, then increase currentFrame

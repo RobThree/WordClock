@@ -11,6 +11,9 @@ public:
     static void SetLED(uint8_t row, uint8_t col, CRGB color);
     static CRGB GetLED(uint8_t index);
     static CRGB GetLED(uint8_t row, uint8_t col);
+    static uint8_t GetRows();
+    static uint8_t GetCols();
+    static uint8_t GetTotalScreenLeds();
     static void Refresh();
 private:
     static void Clear();

@@ -6,7 +6,7 @@
 class Animation
 {
 public:
-    static void SetAnimation(String url);
+    static void Initialize(String url);
     static void SetAnimationFrame(uint32_t time);
 private:
 };
