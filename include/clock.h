@@ -3,8 +3,9 @@
 
 #include <Arduino.h>
 #include <Display.h>
+#include <ihandler.h>
 
-class Clock
+class Clock : public IHandler
 {
 private:
     enum WORD
@@ -33,7 +34,8 @@ private:
     };
 
 public:
-    static void TimestampToDisplay(uint32_t unixDateTime, bool useOffset);
+    static void Handle(HandlerInfo into);
+    static void Initialize();
 
 private:
     static void ShowWords(uint8_t argcount, ...);

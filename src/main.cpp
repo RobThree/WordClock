@@ -25,6 +25,7 @@ void setup()
     StatusBar::Initialize();
     Display::Initialize();
     WIFI::Initialize();
+    Clock::Initialize();
     NTPClock::Initialize();
     OTA::Initialize();
 
@@ -40,7 +41,9 @@ void setup()
 void loop()
 {
     // Get current time
-    uint32_t time = millis();
+    HandlerInfo info;
+    info.uptime = millis();
+    info.time = NTPClock::Now();
 
     // Main loop
     OTA::Handle();
@@ -48,15 +51,14 @@ void loop()
     // Comment Clock::TimestampToDisplay(...) and uncomment next line to switch to animation-mode
     // Ofcourse this needs some sort of state switching, but for now this is it
     // a fun party trick is to leave them on both, I recommend matrix.bin for this
-    // Animation::SetAnimationFrame(time);
-
-    Clock::TimestampToDisplay(NTPClock::Now(), CLOCK_USEROUNDING);
+    // Animation::Handle(info);
+    Clock::Handle(info);
     
     Display::Refresh();
     
     // Determine at what time the next frame should be ready and how long we should
     // wait and then delay for that time.
-    uint32_t t_next = time + frameduration;
+    uint32_t t_next = info.uptime + frameduration;
     uint32_t t_wait = t_next - millis();
     delay(t_wait >= 0 ? t_wait : 0);
 }

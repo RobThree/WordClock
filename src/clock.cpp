@@ -2,6 +2,7 @@
 #include <stdarg.h>
 #include <clock.h>
 #include <statusbar.h>
+#include <config.h>
 
 // Words defined as (startindex, length)
 uint8_t WORDS[] =
@@ -29,10 +30,13 @@ uint8_t WORDS[] =
     /* 20: O'Clock */ 0x6B, 0x03,
 };
 
-void Clock::TimestampToDisplay(uint32_t unixDateTime, bool useOffset = false)
+void Clock::Initialize() {
+}
+
+void Clock::Handle(HandlerInfo info)
 {
     // Strip date part, keep time, apply offset when desired
-    uint32_t time = (unixDateTime + (useOffset ? 150 : 0)) % 86400;
+    uint32_t time = (info.time + (CLOCK_USEROUNDING ? 150 : 0)) % 86400;
     uint8_t hour = time / 3600;       // Determine the hour
     uint8_t part = time % 3600 / 300; // Determine which part of the hour (truncated to 5 minutes)
 

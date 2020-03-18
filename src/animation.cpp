@@ -59,10 +59,10 @@ void Animation::Initialize(String url) {
     }
 }
 
-void Animation::SetAnimationFrame(uint32_t time) {
+void Animation::Handle(HandlerInfo info) {
     // Initialize lastTime
     if (lastTime == 0) {
-        lastTime = time;
+        lastTime = info.uptime;
         return;
     }
 
@@ -71,12 +71,12 @@ void Animation::SetAnimationFrame(uint32_t time) {
 
     // Wait until frametime is passed, then increase currentFrame
     // TODO: handle overshoot when frameTime and frameRate are not compatible
-    if (time - lastTime >= frameTime) { 
+    if (info.uptime - lastTime >= frameTime) { 
         if (currentFrame < frameCount - 1) {
             currentFrame++;
         } else {
             currentFrame = 0;
         }
-        lastTime = time;
+        lastTime = info.uptime;
     }
 }
