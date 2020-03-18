@@ -32,7 +32,7 @@ uint8_t WORDS[] =
 void Clock::TimestampToDisplay(uint32_t unixDateTime, bool useOffset = false)
 {
     // Strip date part, keep time, apply offset when desired
-    uint16_t time = (unixDateTime + (useOffset ? 150 : 0)) % 86400;
+    uint32_t time = (unixDateTime + (useOffset ? 150 : 0)) % 86400;
     uint8_t hour = time / 3600;       // Determine the hour
     uint8_t part = time % 3600 / 300; // Determine which part of the hour (truncated to 5 minutes)
 
