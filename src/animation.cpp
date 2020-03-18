@@ -2,7 +2,6 @@
 #include <animation.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
-#include <statusbar.h>
 
 uint16_t frameCount = 0;
 uint16_t currentFrame = 0;

@@ -26,7 +26,7 @@ CRGB Display::GetLED(uint8_t index) {
     return CRGB::Black;
 }
 
-CRGB Display::GetLED(uint8_t row, uint8_t col) {
+CRGB Display::GetLED(uint8_t col, uint8_t row) {
     return GetLED((row * DISPLAY_COLS) + col);
 }
 
@@ -35,7 +35,7 @@ void Display::SetLED(uint8_t index, CRGB color) {
         leds[MapLED(index)] = color;
 }
 
-void Display::SetLED(uint8_t row, uint8_t col, CRGB color) {
+void Display::SetLED(uint8_t col, uint8_t row, CRGB color) {
     SetLED((row * DISPLAY_COLS) + col, color);
 }
 
@@ -51,8 +51,12 @@ bool Display::CheckBounds(uint8_t index) {
 }
 
 void Display::Clear() {
+    Fill(CRGB::Black);
+}
+
+void Display::Fill(CRGB color) {
     for (uint8_t i = 0; i < DISPLAY_NUM_LEDS_SCREEN; i++)
-        SetLED(i, CRGB::Black);
+        SetLED(i, color);
 }
 
 void Display::Refresh() {

@@ -8,6 +8,9 @@
 #include <ota.h>
 #include <config.h>
 #include <animation.h>
+#include <solidcolor.h>
+#include <rainbow.h>
+#include <gradient.h>
 
 long frameduration;
 
@@ -28,7 +31,13 @@ void setup()
     Clock::Initialize();
     NTPClock::Initialize();
     OTA::Initialize();
+    
+    // Effects:
 
+    // SolidColor::Initialize(CRGB(77,20,0));
+    // Rainbow::Initialize(128, 25);
+    // Gradient::Initialize(CRGB(255, 0, 0), CRGB(0, 255, 0));
+    
     // Example animations
     // Animation::Initialize("http://xs4any.nl/marios/spiral.bin");
     // Animation::Initialize("http://xs4any.nl/marios/testscreen.bin");
@@ -48,10 +57,13 @@ void loop()
     // Main loop
     OTA::Handle();
 
-    // Comment Clock::TimestampToDisplay(...) and uncomment next line to switch to animation-mode
-    // Ofcourse this needs some sort of state switching, but for now this is it
-    // a fun party trick is to leave them on both, I recommend matrix.bin for this
+    // Effects:
     // Animation::Handle(info);
+    // SolidColor::Handle(info);
+    // Rainbow::Handle(info);
+    // Gradient::Handle(info);
+    
+    // Actual time
     Clock::Handle(info);
     
     Display::Refresh();
