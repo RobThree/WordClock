@@ -43,5 +43,9 @@ class StatusBar {
         static ALARM_STATUS GetAlarmStatus();
         static void SetWiFiStatus(WIFI_STATUS status);
         static WIFI_STATUS GetWiFiStatus();
+
+        static void Enable();
+        static void Disable();
+        static bool Enabled();
 };
 #endif

@@ -71,11 +71,13 @@ void Display::Refresh() {
 
     FastLED.setBrightness(map(time, lastldrreading, nextldrreading, lastbrightness, targetbrightness));
 
-    leds[STATUSLED_CLOCK] = StatusBar::GetClockStatus();
-    leds[STATUSLED_HEART] = CHSV(0, 255, GetBlinkValue(time));
-    leds[STATUSLED_PARTY] = StatusBar::GetPartyStatus();
-    leds[STATUSLED_ALARM] = StatusBar::GetAlarmStatus();
-    leds[STATUSLED_WIFI]  = StatusBar::GetWiFiStatus();
+    if (StatusBar::Enabled()) {
+        leds[STATUSLED_CLOCK] = StatusBar::GetClockStatus();
+        leds[STATUSLED_HEART] = CHSV(0, 255, GetBlinkValue(time));
+        leds[STATUSLED_PARTY] = StatusBar::GetPartyStatus();
+        leds[STATUSLED_ALARM] = StatusBar::GetAlarmStatus();
+        leds[STATUSLED_WIFI]  = StatusBar::GetWiFiStatus();
+    }
     
     FastLED.show();
     Clear();

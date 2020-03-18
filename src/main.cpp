@@ -34,7 +34,7 @@ void setup()
     
     // Effects:
 
-    // SolidColor::Initialize(CRGB(77,20,0));
+    // SolidColor::Initialize(CRGB(40,10,0));
     // Rainbow::Initialize(128, 25);
     // Gradient::Initialize(CRGB(255, 0, 0), CRGB(0, 255, 0));
     
@@ -45,6 +45,8 @@ void setup()
     // Animation::Initialize("http://xs4any.nl/marios/hearts.bin");
     // Animation::Initialize("http://xs4any.nl/marios/fireworks.bin");
     // Animation::Initialize("http://xs4any.nl/marios/matrix.bin");
+    
+    // StatusBar::Disable();
 }
 
 void loop()

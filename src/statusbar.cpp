@@ -6,6 +6,8 @@ StatusBar::PARTY_STATUS partystatus;
 StatusBar::ALARM_STATUS alarmstatus;
 StatusBar::WIFI_STATUS  wifistatus;
 
+bool _enabled = true;
+
 void StatusBar::Initialize() {
     SetClockStatus(StatusBar::CLOCK_STATUS::CS_NONE);
     SetPartyStatus(StatusBar::PARTY_STATUS::PS_NONE);
@@ -21,3 +23,6 @@ void StatusBar::SetAlarmStatus(ALARM_STATUS status) { alarmstatus = status; }
 StatusBar::ALARM_STATUS StatusBar::GetAlarmStatus() { return alarmstatus; }
 void StatusBar::SetWiFiStatus(WIFI_STATUS status)   { wifistatus = status; }
 StatusBar::WIFI_STATUS StatusBar::GetWiFiStatus()   { return wifistatus; }
+void StatusBar::Enable() { _enabled = true; }
+void StatusBar::Disable() { _enabled = false; }
+bool StatusBar::Enabled() { return _enabled; }
