@@ -77,6 +77,12 @@ void Display::Refresh() {
         leds[STATUSLED_PARTY] = StatusBar::GetPartyStatus();
         leds[STATUSLED_ALARM] = StatusBar::GetAlarmStatus();
         leds[STATUSLED_WIFI]  = StatusBar::GetWiFiStatus();
+    } else {
+        leds[STATUSLED_CLOCK] = CRGB::Black;
+        leds[STATUSLED_HEART] = CRGB::Black;
+        leds[STATUSLED_PARTY] = CRGB::Black;
+        leds[STATUSLED_ALARM] = CRGB::Black;
+        leds[STATUSLED_WIFI]  = CRGB::Black;
     }
     
     FastLED.show();
