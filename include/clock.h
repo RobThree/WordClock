@@ -21,7 +21,8 @@ private:
         DIGIT_9,
         DIGIT_10,
         DIGIT_11,
-        ITIS,
+        IT,
+        IS,
         FIVE,
         TEN,
         TO,
@@ -32,10 +33,10 @@ private:
     };
 
 public:
-    static void TimestampToDisplay(long unixDateTime, bool useOffset);
+    static void TimestampToDisplay(uint32_t unixDateTime, bool useOffset);
 
 private:
-    static void ShowWords(int argcount, ...);
+    static void ShowWords(uint8_t argcount, ...);
 };
 
 #endif

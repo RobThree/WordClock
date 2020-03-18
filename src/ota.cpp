@@ -22,7 +22,7 @@ void OTA::Initialize() {
     ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
         uint progresspercentage = (progress / (total / 100));
         Serial.printf("Progress: %u%%\r", progresspercentage);
-        for (int i=0;i< map(progresspercentage, 0, 100, DISPLAY_NUM_STATUSLEDS, DISPLAY_NUM_LEDS);i++)
+        for (int i=0;i< map(progresspercentage, 0, 100, 0, DISPLAY_NUM_LEDS_SCREEN);i++)
             Display::SetLED(i, CHSV(map(progresspercentage, 0, 100, 0, 255), 255, 255));
         StatusBar::SetWiFiStatus(StatusBar::WIFI_STATUS::WS_OTAPROGRESS);
         Display::Refresh();

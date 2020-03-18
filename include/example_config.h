@@ -19,8 +19,11 @@
 
 // LED display properties
 #define DISPLAY_LED_PIN         D2
-#define DISPLAY_NUM_LEDS        115
+#define DISPLAY_ROWS            10
+#define DISPLAY_COLS            11
 #define DISPLAY_NUM_STATUSLEDS  5
+#define DISPLAY_NUM_LEDS_SCREEN DISPLAY_ROWS * DISPLAY_COLS
+#define DISPLAY_NUM_LEDS_TOTAL  DISPLAY_NUM_LEDS_SCREEN + DISPLAY_NUM_STATUSLEDS
 #define DISPLAY_LED_TYPE        WS2812B
 #define DISPLAY_COLOR_ORDER     GRB
 
@@ -40,4 +43,5 @@
 // Clock settings
 #define CLOCK_USEROUNDING   true    // Will round to the nearest 5 minutes instead of switching at exact time
 #define CLOCK_FPS           25      // Number of (desired) frames per second, no guarantees
+#define SERIAL_SPEED        460800
 #endif

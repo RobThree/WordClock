@@ -3,32 +3,56 @@
 #include <config.h>
 #include <statusbar.h>
 
-CRGB leds[DISPLAY_NUM_LEDS];
-long nextldrreading = 0;
-long lastldrreading = 0;
+CRGB leds[DISPLAY_NUM_LEDS_TOTAL];
+uint32_t nextldrreading = 0;
+uint32_t lastldrreading = 0;
 uint8_t targetbrightness = LDR_LIGHT;
 uint8_t lastbrightness = 0;
 
 void Display::Initialize() {
-    FastLED.addLeds<DISPLAY_LED_TYPE, DISPLAY_LED_PIN, DISPLAY_COLOR_ORDER>(leds, DISPLAY_NUM_LEDS).setCorrection(TypicalLEDStrip);
+    FastLED.addLeds<DISPLAY_LED_TYPE, DISPLAY_LED_PIN, DISPLAY_COLOR_ORDER>(leds, DISPLAY_NUM_LEDS_TOTAL).setCorrection(TypicalLEDStrip);
     FastLED.setBrightness(LDR_DARK);
     Clear();
     Refresh();
 }
 
-void Display::SetLED(int index, CRGB color) {
-    if (index >= 0 && index < DISPLAY_NUM_LEDS)
-        leds[index] = color;
+CRGB Display::GetLED(uint8_t index) {
+    if (CheckBounds(index))
+        return leds[MapLED(index)];
+    return CRGB::Black;
+}
+
+CRGB Display::GetLED(uint8_t row, uint8_t col) {
+    return GetLED((row * DISPLAY_COLS) + col);
+}
+
+void Display::SetLED(uint8_t index, CRGB color) {
+    if (CheckBounds(index))
+        leds[MapLED(index)] = color;
+}
+
+void Display::SetLED(uint8_t row, uint8_t col, CRGB color) {
+    SetLED((row * DISPLAY_COLS) + col, color);
+}
+
+uint8_t Display::MapLED(uint8_t index) {
+    uint8_t row = index / DISPLAY_COLS;
+    return (row % 2 == 0)	// If uneven row, numbering is from right to left
+        ? ((row + 1) * DISPLAY_COLS) - (index % DISPLAY_COLS) + DISPLAY_NUM_STATUSLEDS - 1
+        : index + DISPLAY_NUM_STATUSLEDS;
+}
+
+bool Display::CheckBounds(uint8_t index) {
+    return (index >= 0 && index < DISPLAY_NUM_LEDS_SCREEN);
 }
 
 void Display::Clear() {
-    for (int i = 0; i < DISPLAY_NUM_LEDS; i++)
+    for (uint8_t i = 0; i < DISPLAY_NUM_LEDS_SCREEN; i++)
         SetLED(i, CRGB::Black);
 }
 
-
 void Display::Refresh() {
-    long time = millis();
+    uint32_t time = millis();
 
     if (time >= nextldrreading) {
         lastldrreading = time;
@@ -51,7 +75,7 @@ void Display::Refresh() {
 
 // Returns a brightness for a given point in time and frequency so that blinks stay
 // in sync (as much as possible) with actual time.
-double Display::GetBlinkValue(long time, double freq, int min, int max)
+double Display::GetBlinkValue(uint32_t time, double freq, uint8_t min, uint8_t max)
 {
     // Scale a second to 256 'ticks'/sec and multiply by frequency, calculate the
     // quadwave8 (fast sin approximation provided by FastLED library) and finally

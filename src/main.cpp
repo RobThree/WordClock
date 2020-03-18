@@ -13,7 +13,7 @@ long frameduration;
 
 void setup()
 {
-    Serial.begin(460800);
+    Serial.begin(SERIAL_SPEED);
     Serial.println("Booting...");
 
     pinMode(DISPLAY_LED_PIN, OUTPUT);
@@ -40,13 +40,13 @@ void setup()
 void loop()
 {
     // Get current time
-    long time = millis();
+    uint32_t time = millis();
 
     // Main loop
     OTA::Handle();
 
-    // comment Clock::TimestampToDisplay(...) and uncomment next line to switch to animation-mode
-    // of course this needs some sort of state switching, but for now this is it
+    // Comment Clock::TimestampToDisplay(...) and uncomment next line to switch to animation-mode
+    // Ofcourse this needs some sort of state switching, but for now this is it
     // a fun party trick is to leave them on both, I recommend matrix.bin for this
     // Animation::SetAnimationFrame(time);
 
@@ -56,7 +56,7 @@ void loop()
     
     // Determine at what time the next frame should be ready and how long we should
     // wait and then delay for that time.
-    long t_next = time + frameduration;
-    long t_wait = t_next - millis();
+    uint32_t t_next = time + frameduration;
+    uint32_t t_wait = t_next - millis();
     delay(t_wait >= 0 ? t_wait : 0);
 }
