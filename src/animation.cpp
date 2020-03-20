@@ -5,7 +5,6 @@
 
 uint16_t frameCount = 0;
 uint16_t currentFrame = 0;
-//uint16_t frameTime = 1000;
 uint32_t lastTime = 0;
 uint8_t data = 0;
 uint8_t totalleds;
