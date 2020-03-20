@@ -5,7 +5,7 @@
 
 uint16_t frameCount = 0;
 uint16_t currentFrame = 0;
-uint16_t frameTime = 1000;
+//uint16_t frameTime = 1000;
 uint32_t lastTime = 0;
 uint8_t data = 0;
 uint8_t totalleds;
@@ -14,18 +14,14 @@ uint8_t totalleds;
 
 typedef struct
 {
+    uint16_t delay;
     uint32_t pixels[110];
 } AnimationFrame;
 
 AnimationFrame frames[60];
 
-
 void Animation::Initialize(String url) {
     totalleds = Display::GetTotalScreenLeds();
-
-    // Fixed frametime, for now
-    // Right now the delay (16 bytes) isn't loaded and is included in the offset.
-    frameTime = 250;
 
     WiFiClient client;
     HTTPClient http;
@@ -42,8 +38,13 @@ void Animation::Initialize(String url) {
             uint16_t height = (buffer[5] << 8) + buffer[4];
 
             for (uint8_t i = 0; i < frameCount; i++) {
-                // offset = number of frames, times 110 pixels, times 3 bytes per pixel, plus six header bytes, plus two header bytes per frame
-                uint16_t offset = i * 110 * 3 + 6 + ((i + 1) * 2);
+                // offset = number of frames, times 110 pixels, times 3 bytes per pixel, plus six header bytes, plus two header bytes per previous frame
+                uint16_t offset = i * 110 * 3 + 6 + (i * 2);
+                uint16_t delay = (buffer[offset + 1] << 8) + buffer[offset];
+                frames[i].delay = delay;
+
+                // offset the current header
+                offset += 2;
                 for (uint8_t y = 0; y < height; y++) {
                     for (uint8_t x = 0; x < width; x++) {
                         uint16_t pixel = (y * width + x) * 3 + offset;
@@ -70,7 +71,7 @@ void Animation::Handle(HandlerInfo info) {
 
     // Wait until frametime is passed, then increase currentFrame
     // TODO: handle overshoot when frameTime and frameRate are not compatible
-    if (info.uptime - lastTime >= frameTime) { 
+    if (info.uptime - lastTime >= frames[currentFrame].delay) { 
         if (currentFrame < frameCount - 1) {
             currentFrame++;
         } else {
