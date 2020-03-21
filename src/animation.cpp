@@ -9,15 +9,13 @@ uint32_t lastTime = 0;
 uint8_t data = 0;
 uint8_t totalleds;
 
-#define max(a,b) ((a)>(b)?(a):(b))
-
 typedef struct
 {
     uint16_t delay;
-    uint32_t pixels[110];
+    CRGB pixels[110];
 } AnimationFrame;
 
-AnimationFrame frames[60];
+AnimationFrame* frames;
 
 void Animation::Initialize(String url) {
     totalleds = Display::GetTotalScreenLeds();
@@ -29,10 +27,10 @@ void Animation::Initialize(String url) {
         if (httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_FOUND) {
             uint8_t buffer[http.getSize()];
             client.readBytes(buffer, sizeof(buffer));
-
             // Framecount, width, height and delay are 16 bytes
             // Little endian order in buffer!
             frameCount = (buffer[1] << 8) + buffer[0];
+            frames = new AnimationFrame[frameCount];
             uint16_t width = (buffer[3] << 8) + buffer[2];
             uint16_t height = (buffer[5] << 8) + buffer[4];
 
@@ -47,10 +45,7 @@ void Animation::Initialize(String url) {
                 for (uint8_t y = 0; y < height; y++) {
                     for (uint8_t x = 0; x < width; x++) {
                         uint16_t pixel = (y * width + x) * 3 + offset;
-                        CRGB rgb;
-                        rgb.setRGB(buffer[pixel + 2], buffer[pixel + 1], buffer[pixel]);
-
-                        memcpy(&frames[i].pixels[y * width + x], &rgb, sizeof(rgb));
+                        frames[i].pixels[y * width + x].setRGB(buffer[pixel], buffer[pixel + 1], buffer[pixel + 2]);
                     }
                 }
             }
@@ -68,7 +63,7 @@ void Animation::Handle(HandlerInfo info) {
     for (uint8_t i = 0; i < totalleds; i++)
         Display::SetLED(i, frames[currentFrame].pixels[i]);
 
-    // Wait until frametime is passed, then increase currentFrame
+    // Wait until delay is passed, then increase currentFrame
     // TODO: handle overshoot when frameTime and frameRate are not compatible
     if (info.uptime - lastTime >= frames[currentFrame].delay) { 
         if (currentFrame < frameCount - 1) {
