@@ -26,6 +26,7 @@
 #define DISPLAY_NUM_LEDS_TOTAL  DISPLAY_NUM_LEDS_SCREEN + DISPLAY_NUM_STATUSLEDS
 #define DISPLAY_LED_TYPE        WS2812B
 #define DISPLAY_COLOR_ORDER     GRB
+#define DISPLAY_TIME_COLOR      CRGB::White
 
 // LDR settings
 #define LDR_PIN                 A0

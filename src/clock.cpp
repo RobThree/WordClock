@@ -77,7 +77,7 @@ void Clock::ShowWords(uint8_t argcount, ...)
         uint8_t wordlen = WORDS[wordindex + 1];
 
         for (uint8_t c = 0; c < wordlen; c++)
-            Display::SetLED(wordstart + c, CRGB::White);
+            Display::SetLED(wordstart + c, DISPLAY_TIME_COLOR);
         
         va_end(arguments);
     }
