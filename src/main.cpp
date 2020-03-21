@@ -12,7 +12,7 @@
 #include <rainbow.h>
 #include <gradient.h>
 
-long frameduration;
+uint32_t frameduration;
 
 void setup()
 {
@@ -39,6 +39,7 @@ void setup()
     // Gradient::Initialize(CRGB(255, 0, 0), CRGB(0, 255, 0));
     
     // Example animations
+    // Animation::Initialize("http://xs4any.nl/marios/fire.bin");
     // Animation::Initialize("http://xs4any.nl/marios/spiral.bin");
     // Animation::Initialize("http://xs4any.nl/marios/testscreen.bin");
     // Animation::Initialize("http://xs4any.nl/marios/mario.bin");
@@ -69,10 +70,10 @@ void loop()
     Clock::Handle(info);
     
     Display::Refresh();
-    
+
     // Determine at what time the next frame should be ready and how long we should
     // wait and then delay for that time.
     uint32_t t_next = info.uptime + frameduration;
     uint32_t t_wait = t_next - millis();
-    delay(t_wait >= 0 ? t_wait : 0);
+    delay(t_wait <= frameduration ? t_wait : 0);
 }
