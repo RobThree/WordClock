@@ -72,10 +72,10 @@ void loop()
     OTA::Handle();
 
     // Effects:
-    // Animation::Handle(time);
-    // SolidColor::Handle(time);
-    // Rainbow::Handle(time);
-    // Gradient::Handle(time);
+    // Animation::Handle(_time);
+    // SolidColor::Handle(_time);
+    // Rainbow::Handle(_time);
+    // Gradient::Handle(_time);
     
     // Actual time
     Clock::Handle(_time);

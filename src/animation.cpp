@@ -53,13 +53,14 @@ void Animation::Initialize(String url) {
 }
 
 void Animation::Handle(Time time) {
+    for (uint8_t i = 0; i < _totalleds; i++)
+        Display::SetLED(i, frames[_currentframe].pixels[i]);
+
     // Time for a new frame?
-    if (time.uptime > _nexttime) {
-        for (uint8_t i = 0; i < _totalleds; i++)
-            Display::SetLED(i, frames[_currentframe].pixels[i]);
+    if (time.uptime >= _nexttime) {
         // Determine when to display next frame
         _nexttime = time.uptime + frames[_currentframe].delay;
         // Advance frame
-        _currentframe = ++_currentframe % _framecount;
+        _currentframe = (_currentframe + 1) % _framecount;
     }
 }

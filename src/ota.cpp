@@ -36,7 +36,7 @@ void OTA::Initialize() {
         else if (error == OTA_CONNECT_ERROR) Serial.println("Connect Failed");
         else if (error == OTA_RECEIVE_ERROR) Serial.println("Receive Failed");
         else if (error == OTA_END_ERROR) Serial.println("End Failed");
-        delay(5000);    // Make sure the status can be seen
+        delay(2000);    // Make sure the status can be seen
     });
     ArduinoOTA.begin();
     Serial.println("OTA initialized");
