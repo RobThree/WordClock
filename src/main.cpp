@@ -53,27 +53,27 @@ void setup()
 void loop()
 {
     // Get current time
-    Time info;
-    info.uptime = millis();
-    info.time = NTPClock::Now();
+    Time time;
+    time.uptime = millis();
+    time.time = NTPClock::Now();
 
     // Main loop
     OTA::Handle();
 
     // Effects:
-    // Animation::Handle(info);
-    // SolidColor::Handle(info);
-    // Rainbow::Handle(info);
-    // Gradient::Handle(info);
+    // Animation::Handle(time);
+    // SolidColor::Handle(time);
+    // Rainbow::Handle(time);
+    // Gradient::Handle(time);
     
     // Actual time
-    Clock::Handle(info);
+    Clock::Handle(time);
     
-    Display::Refresh();
+    Display::Refresh(time);
 
     // Determine at what time the next frame should be ready and how long we should
     // wait and then delay for that time.
-    uint32_t t_next = info.uptime + frameduration;
+    uint32_t t_next = time.uptime + frameduration;
     uint32_t t_wait = t_next - millis();
     delay(t_wait <= frameduration ? t_wait : 0);
 }

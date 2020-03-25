@@ -2,6 +2,7 @@
 #define DISPLAY_H
 
 #include <FastLED.h>
+#include <ihandler.h>
 
 class Display
 {
@@ -15,6 +16,7 @@ public:
     static uint8_t GetCols();
     static uint8_t GetTotalScreenLeds();
     static void Refresh();
+    static void Refresh(Time time);
     static void Clear();
     static void Fill(CRGB color);
 private:

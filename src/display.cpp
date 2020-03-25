@@ -4,10 +4,11 @@
 #include <statusbar.h>
 
 CRGB leds[DISPLAY_NUM_LEDS_TOTAL];
-uint32_t nextldrreading = 0;
-uint32_t lastldrreading = 0;
+uint64_t nextldrreading = 0;
+uint64_t lastldrreading = 0;
 uint8_t targetbrightness = LDR_LIGHT;
 uint8_t lastbrightness = 0;
+Time lastrefresh;
 
 void Display::Initialize() {
     FastLED.addLeds<DISPLAY_LED_TYPE, DISPLAY_LED_PIN, DISPLAY_COLOR_ORDER>(leds, DISPLAY_NUM_LEDS_TOTAL).setCorrection(TypicalLEDStrip);
@@ -60,20 +61,23 @@ void Display::Fill(CRGB color) {
 }
 
 void Display::Refresh() {
-    uint32_t time = millis();
+    Display:: Refresh(lastrefresh);
+}
 
-    if (time >= nextldrreading) {
-        lastldrreading = time;
+void Display::Refresh(Time time) {
+    lastrefresh = time;
+    if (time.uptime >= nextldrreading) {
+        lastldrreading = time.uptime;
         nextldrreading = lastldrreading + LDR_FADE_TIME;
         lastbrightness = FastLED.getBrightness();
         targetbrightness = map(analogRead(LDR_PIN), 0, 1024, LDR_DARK, LDR_LIGHT);
     }
 
-    FastLED.setBrightness(map(time, lastldrreading, nextldrreading, lastbrightness, targetbrightness));
+    FastLED.setBrightness(map(time.uptime, lastldrreading, nextldrreading, lastbrightness, targetbrightness));
 
     if (StatusBar::Enabled()) {
         leds[STATUSLED_CLOCK] = StatusBar::GetClockStatus();
-        leds[STATUSLED_HEART] = CHSV(0, 255, GetBlinkValue(time));
+        leds[STATUSLED_HEART] = CHSV(0, 255, GetBlinkValue(time.uptime));
         leds[STATUSLED_PARTY] = StatusBar::GetPartyStatus();
         leds[STATUSLED_ALARM] = StatusBar::GetAlarmStatus();
         leds[STATUSLED_WIFI]  = StatusBar::GetWiFiStatus();
