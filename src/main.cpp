@@ -12,7 +12,8 @@
 #include <rainbow.h>
 #include <gradient.h>
 
-uint32_t frameduration;
+uint16_t _frameduration;
+Time _time;
 
 void setup()
 {
@@ -23,7 +24,7 @@ void setup()
     pinMode(LDR_PIN, INPUT);
     
     // Calculate frame duration (in milliseconds) once, so we don't need to keep doing this
-    frameduration = 1000 / CLOCK_FPS;
+    _frameduration = 1000 / CLOCK_FPS;
 
     StatusBar::Initialize();
     Display::Initialize();
@@ -52,10 +53,20 @@ void setup()
 
 void loop()
 {
+    // Split time parts of last time into low/high DWORDS
+    uint32_t time_l = _time.uptime >> 32;
+    uint32_t time_h = _time.uptime;
     // Get current time
-    Time time;
-    time.uptime = millis();
-    time.time = NTPClock::Now();
+    uint32_t ctime = millis();
+
+    // Handle rollover/overflow
+    if (ctime < time_h)
+        time_l++;   // Increase low DWORD
+
+    // Reassemble time
+    _time.uptime = ((uint64_t)time_l << 32) | ctime;
+    // Store current time in seconds since epoch
+    _time.time = NTPClock::Now();
 
     // Main loop
     OTA::Handle();
@@ -67,13 +78,15 @@ void loop()
     // Gradient::Handle(time);
     
     // Actual time
-    Clock::Handle(time);
+    Clock::Handle(_time);
     
-    Display::Refresh(time);
+    Display::Refresh(_time);
 
     // Determine at what time the next frame should be ready and how long we should
-    // wait and then delay for that time.
-    uint32_t t_next = time.uptime + frameduration;
-    uint32_t t_wait = t_next - millis();
-    delay(t_wait <= frameduration ? t_wait : 0);
+    // wait and then delay for that time. Note that we're working in the 32bit domain
+    // here. We're calling millis() here again because we want to take into account
+    // the actual duration of the time the last frame took since last time we called
+    // millis() at the top of this function.
+    uint32_t t_wait = (ctime + _frameduration) - millis();
+    delay(t_wait <= _frameduration ? t_wait : 0);
 }

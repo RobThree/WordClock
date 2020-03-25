@@ -3,11 +3,10 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 
-uint16_t frameCount = 0;
-uint16_t currentFrame = 0;
-uint32_t lastTime = 0;
-uint8_t data = 0;
-uint8_t totalleds;
+uint16_t _framecount = 0;
+uint16_t _currentframe = 0;
+uint64_t _nexttime = 0;
+uint8_t _totalleds;
 
 typedef struct
 {
@@ -18,7 +17,7 @@ typedef struct
 AnimationFrame* frames;
 
 void Animation::Initialize(String url) {
-    totalleds = Display::GetTotalScreenLeds();
+    _totalleds = Display::GetTotalScreenLeds();
 
     WiFiClient client;
     HTTPClient http;
@@ -29,12 +28,12 @@ void Animation::Initialize(String url) {
             client.readBytes(buffer, sizeof(buffer));
             // Framecount, width, height and delay are 16 bytes
             // Little endian order in buffer!
-            frameCount = (buffer[1] << 8) + buffer[0];
-            frames = new AnimationFrame[frameCount];
+            _framecount = (buffer[1] << 8) + buffer[0];
+            frames = new AnimationFrame[_framecount];
             uint16_t width = (buffer[3] << 8) + buffer[2];
             uint16_t height = (buffer[5] << 8) + buffer[4];
 
-            for (uint8_t i = 0; i < frameCount; i++) {
+            for (uint8_t i = 0; i < _framecount; i++) {
                 // offset = number of frames, times 110 pixels, times 3 bytes per pixel, plus six header bytes, plus two header bytes per previous frame
                 uint16_t offset = i * 110 * 3 + 6 + (i * 2);
                 uint16_t delay = (buffer[offset + 1] << 8) + buffer[offset];
@@ -54,23 +53,13 @@ void Animation::Initialize(String url) {
 }
 
 void Animation::Handle(Time time) {
-    // Initialize lastTime
-    if (lastTime == 0) {
-        lastTime = time.uptime;
-        return;
-    }
-
-    for (uint8_t i = 0; i < totalleds; i++)
-        Display::SetLED(i, frames[currentFrame].pixels[i]);
-
-    // Wait until delay is passed, then increase currentFrame
-    // TODO: handle overshoot when frameTime and frameRate are not compatible
-    if (time.uptime - lastTime >= frames[currentFrame].delay) { 
-        if (currentFrame < frameCount - 1) {
-            currentFrame++;
-        } else {
-            currentFrame = 0;
-        }
-        lastTime = time.uptime;
+    // Time for a new frame?
+    if (time.uptime > _nexttime) {
+        for (uint8_t i = 0; i < _totalleds; i++)
+            Display::SetLED(i, frames[_currentframe].pixels[i]);
+        // Determine when to display next frame
+        _nexttime = time.uptime + frames[_currentframe].delay;
+        // Advance frame
+        _currentframe = ++_currentframe % _framecount;
     }
 }
