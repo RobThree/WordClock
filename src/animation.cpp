@@ -53,10 +53,10 @@ void Animation::Initialize(String url) {
     }
 }
 
-void Animation::Handle(HandlerInfo info) {
+void Animation::Handle(Time time) {
     // Initialize lastTime
     if (lastTime == 0) {
-        lastTime = info.uptime;
+        lastTime = time.uptime;
         return;
     }
 
@@ -65,12 +65,12 @@ void Animation::Handle(HandlerInfo info) {
 
     // Wait until delay is passed, then increase currentFrame
     // TODO: handle overshoot when frameTime and frameRate are not compatible
-    if (info.uptime - lastTime >= frames[currentFrame].delay) { 
+    if (time.uptime - lastTime >= frames[currentFrame].delay) { 
         if (currentFrame < frameCount - 1) {
             currentFrame++;
         } else {
             currentFrame = 0;
         }
-        lastTime = info.uptime;
+        lastTime = time.uptime;
     }
 }

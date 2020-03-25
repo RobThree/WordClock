@@ -3,15 +3,15 @@
 
 #include <Arduino.h>
 
-struct HandlerInfo
+struct Time
 {
-    uint32_t uptime;    // Uptime in milliseconds
+    uint64_t uptime;    // Uptime in milliseconds
     uint32_t time;      // Actual time
 };
 
 class IHandler {
     public:
-        static void Handle(HandlerInfo info);
+        static void Handle(Time time);
 };
 
 #endif

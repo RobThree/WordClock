@@ -7,6 +7,6 @@ void SolidColor::Initialize(CRGB color) {
     _color = color;
 }
 
-void SolidColor::Handle(HandlerInfo info) {
+void SolidColor::Handle(Time time) {
     Display::Fill(_color);
 }

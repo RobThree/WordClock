@@ -33,12 +33,12 @@ uint8_t WORDS[] =
 void Clock::Initialize() {
 }
 
-void Clock::Handle(HandlerInfo info)
+void Clock::Handle(Time time)
 {
     // Strip date part, keep time, apply offset when desired
-    uint32_t time = (info.time + (CLOCK_USEROUNDING ? 150 : 0)) % 86400;
-    uint8_t hour = time / 3600;       // Determine the hour
-    uint8_t part = time % 3600 / 300; // Determine which part of the hour (truncated to 5 minutes)
+    uint32_t timesec = (time.time + (CLOCK_USEROUNDING ? 150 : 0)) % 86400;
+    uint8_t hour = timesec / 3600;       // Determine the hour
+    uint8_t part = timesec % 3600 / 300; // Determine which part of the hour (truncated to 5 minutes)
 
     ShowWords(2, IT, IS);
     switch (part)

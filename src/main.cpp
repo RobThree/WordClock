@@ -53,7 +53,7 @@ void setup()
 void loop()
 {
     // Get current time
-    HandlerInfo info;
+    Time info;
     info.uptime = millis();
     info.time = NTPClock::Now();
 

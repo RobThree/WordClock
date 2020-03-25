@@ -34,7 +34,7 @@ private:
     };
 
 public:
-    static void Handle(HandlerInfo into);
+    static void Handle(Time time);
     static void Initialize();
 
 private:

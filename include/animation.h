@@ -8,7 +8,7 @@ class Animation : public IHandler
 {
 public:
     static void Initialize(String url);
-    static void Handle(HandlerInfo info);
+    static void Handle(Time time);
 private:
 };
 #endif

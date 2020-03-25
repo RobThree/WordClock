@@ -8,7 +8,7 @@ class SolidColor : public IHandler
 {
 public:
     static void Initialize(CRGB color);
-    static void Handle(HandlerInfo info);
+    static void Handle(Time time);
 private:
 };
 #endif
