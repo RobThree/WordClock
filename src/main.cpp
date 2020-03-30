@@ -11,6 +11,7 @@
 #include <solidcolor.h>
 #include <rainbow.h>
 #include <gradient.h>
+#include <temperature.h>
 
 uint16_t _frameduration;
 Time _time;
@@ -32,7 +33,8 @@ void setup()
     Clock::Initialize();
     NTPClock::Initialize();
     OTA::Initialize();
-    
+    // Temperature::Initialize(TEMPERATURE_XOFF, TEMPERATURE_YOFF, TEMPERATURE_COLD_COLOR, TEMPERATURE_WARM_COLOR);
+
     // Effects:
 
     // SolidColor::Initialize(CRGB(40,10,0));
@@ -79,6 +81,7 @@ void loop()
     
     // Actual time
     Clock::Handle(_time);
+    // Temperature::Handle(_time);
     
     Display::Refresh(_time);
 

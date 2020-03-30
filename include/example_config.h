@@ -41,6 +41,13 @@
 #define STATUSLED_ALARM     0x03
 #define STATUSLED_WIFI      0x04
 
+// Temperature setting
+#define TEMPERATURE_XOFF        0           // X-offset for temperature reading
+#define TEMPERATURE_YOFF        2           // Y-offset for temperature reading
+#define TEMPERATURE_UNIT        CELSIUS     // CELSIUS or FAHRENHEIT
+#define TEMPERATURE_COLD_COLOR  CRGB::Blue  // Cold color (temperatures <= 0)
+#define TEMPERATURE_WARM_COLOR  CRGB::Red   // Warm color (temperatures > 0)
+
 // Clock settings
 #define CLOCK_USEROUNDING   true    // Will round to the nearest 5 minutes instead of switching at exact time
 #define CLOCK_FPS           25      // Number of (desired) frames per second, no guarantees

@@ -70,6 +70,9 @@ void Display::Refresh(Time time) {
         lastldrreading = time.uptime;
         nextldrreading = lastldrreading + LDR_FADE_TIME;
         lastbrightness = FastLED.getBrightness();
+
+        // TODO: Create/use an interface (like ILightSensor) that is initialized in the Initialize() method
+        // so we can support different sensors
         targetbrightness = map(analogRead(LDR_PIN), 0, 1024, LDR_DARK, LDR_LIGHT);
     }
 
