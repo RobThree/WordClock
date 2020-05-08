@@ -5,8 +5,9 @@ Hobby project building a word clock with friends. Features are still being debat
 
 # Table of Contents
 * [The idea](#the-idea)
-* [Parts](#parts)
-  - [Optional parts](#optional-parts)
+* [Parts](#parts-and-components)
+  - [Optional but very much recommmended parts and components](#optional-but-very-much-recommended-parts-and-components)
+  - [Optional parts and components](#optional-parts-and-components)
 * [Build instructions](#build-instructions)
 * [Getting started with the software](#getting-started-with-the-software)
 * [FAQ](#faq)
@@ -23,7 +24,7 @@ The idea is to take a Ribba ([Black](https://www.ikea.com/nl/nl/p/ribba-fotolijs
 
 Because we use RGB leds any of the indicators can have multiple functions, as do the letters by the way, by combining color, flashing or 'pulsing' and other effects. Because we have 115 "pixels" available that we can make pretty much any color we can do a whole lot with this "display" other than have it display the time. Think of rainbow or 'matrix' effects, playing snake, or tetris, on it with your phone as a controller, displaying an analogue clock using the "pixels", have it display the roomtemperature or even the local weather... We're only limited by the restrictions of the microcontroller, what is possible in software and what we can display on the 'screen'. And that sounds restrictive but having WiFi and, thus, internect connectivity we can do a LOT and are mostly bound by our own imagination.
 
-## Required Parts
+## Required parts and components
 
 - A Ribba (see [the idea](#the-idea))
 - A [Wemos D1 mini](https://www.aliexpress.com/item/32651747570.html) (or a NodeMCU, ESP32, Raspberry pi)
@@ -40,7 +41,7 @@ Since, normally, we won't be driving all LEDs at the same time at full brightnes
 
 In normal operation about 20~25 LEDs will be on at the same time, which should draw about 1.5A max. Only in the very worst case scenario will we need the full 7A. However, we _designed_ this clock to be able to handle this (should we add functionality other than displaying the time, requiring more/all LEDs to be lit). Because of this it is also important to use at least 0.82mm² / 18 AWG wire at minimum to provide power to the LED strip. A short strip of the power cable could be used for that purpose.
 
-### Optional, but very much recommended parts
+### Optional, but very much recommended parts and components
 
 You _can_ just solder wires directly to components or other wires, you don't _need_ connectors, you don't _need_ to heatshrink connections and you don't _need_ a PCB technically. These parts and components do, however, improve the quality of the product by a big margin. I strongly suggest you get these as well. We will use these in our build instructions.
 
@@ -53,7 +54,7 @@ You _can_ just solder wires directly to components or other wires, you don't _ne
 
 \* Make sure you order the correct size for the terminal screws on your powersupply. For M3.5 screws order SV 1.25-3.5 if you can, else round up to SV 1.25-4
 
-### Optional parts
+### Optional parts and components
 
 To improve the circuit or to add additional features:
 
