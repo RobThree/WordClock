@@ -5,7 +5,7 @@ Hobby project building a word clock with friends. Features are still being debat
 
 # Table of Contents
 * [The idea](#the-idea)
-* [Parts](#parts-and-components)
+* [Parts](#required-parts-and-components)
   - [Optional but very much recommmended parts and components](#optional-but-very-much-recommended-parts-and-components)
   - [Optional parts and components](#optional-parts-and-components)
 * [Build instructions](#build-instructions)
