@@ -70,7 +70,7 @@ To improve the circuit or to add additional features:
 
 ## Build instructions
 
-TODO
+See [our Wiki page](https://github.com/RobThree/WordClock/wiki/Build-instructions) for build instructions.
 
 ## Getting started with the software
 
