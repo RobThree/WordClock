@@ -14,7 +14,7 @@ Hobby project building a word clock with friends. Features are still being debat
 
 ## The idea
 
-The idea is to take a Ribba ([Black](https://www.ikea.com/nl/nl/p/ribba-fotolijst-zwart-40378401/) or [white](https://www.ikea.com/nl/nl/p/ribba-fotolijst-wit-00378403/)<sub><sup>, Shamone!</sup></sub>) and repurpose it as a WordClock. We'll use a cutting plotter on self adhesive vinyl to cut the words and icons. The design is a bit different from most other WordClocks in that it includes a few icons which can be assigned for any purpose. The design includes:
+The idea is to take a 230mm x 230mm Ribba ([Black](https://www.ikea.com/nl/nl/p/ribba-fotolijst-zwart-40378401/) or [white](https://www.ikea.com/nl/nl/p/ribba-fotolijst-wit-00378403/)<sub><sup>, Shamone!</sup></sub>) and repurpose it as a WordClock. We'll use a cutting plotter on self adhesive vinyl to cut the words and icons. The design is a bit different from most other WordClocks in that it includes a few icons which can be assigned for any purpose. The design includes:
 
 - An alarmclock - as an indicator an alarm is set for example
 - A heart - as a seconds-indicator (make it 'pulse' red to give it a heartbeat feel) or maybe you make it light up on Valentine's day?
