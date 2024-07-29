@@ -17,7 +17,7 @@ void WIFI::Initialize() {
     // Update status when we get a connection
     gotIpEventHandler = WiFi.onStationModeGotIP([](const WiFiEventStationModeGotIP& event)
     {
-        Serial.printf("Station connected, IP: %s", WiFi.localIP().toString().c_str());
+        Serial.printf("Station connected, IP: %s\n", WiFi.localIP().toString().c_str());
         WIFI::UpdateStatus();
     });
 
