@@ -28,6 +28,9 @@
 #define DISPLAY_COLOR_ORDER     GRB
 #define DISPLAY_TIME_COLOR      CRGB::White
 
+// Button settings
+#define BUTTON_EFFECTS          D6
+
 // LDR settings
 #define LDR_PIN                 A0
 #define LDR_DARK                64      // Brightness for dark environment

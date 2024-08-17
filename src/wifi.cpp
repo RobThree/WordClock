@@ -45,7 +45,7 @@ void WIFI::Initialize() {
 void WIFI::Connect() {
     StatusBar::SetWiFiStatus(StatusBar::WIFI_STATUS::WS_CONNECTING);
     Display::Refresh();
-    Serial.printf("Connecting to %s...\n", wifi_ssid);
+    Serial.printf("Connecting to %s\n", wifi_ssid);
     WiFi.begin(wifi_ssid, wifi_pass);
 }
 

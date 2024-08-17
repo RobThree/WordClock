@@ -15,16 +15,74 @@
 
 uint16_t _frameduration;
 Time _time;
+uint8_t _effect = 0;
+
+void seteffect(uint8_t effect)
+{
+    _effect = effect % 9;
+    Serial.printf("Initializing effect %d\n", _effect);
+    switch (_effect)
+    {
+        case 1:
+            SolidColor::Initialize(CRGB(40,10,0));
+            break;
+        case 2:
+            Rainbow::Initialize(128, 25);
+            break;
+        case 3:
+            Gradient::Initialize(CRGB(255, 0, 0), CRGB(0, 255, 0));
+            break;
+        case 4:
+            Animation::Initialize("/fire.bin");
+            break;
+        case 5:
+            Animation::Initialize("/spiral.bin");
+            break;
+        case 6:
+            Animation::Initialize("/mario.bin");
+            break;
+        case 7:
+            Animation::Initialize("/fireworks.bin");
+            break;
+        case 8:
+            Animation::Initialize("/matrix.bin");
+            break;
+        default:
+            SolidColor::Initialize(CRGB(0,0,0));
+            break;
+    }
+}
+
+void handleeffect(uint8_t effect) {
+    switch (effect)
+    {
+        case 0:
+            break;
+        case 1:
+            SolidColor::Handle(_time);
+            break;
+        case 2:
+            Rainbow::Handle(_time);
+            break;
+        case 3:
+            Gradient::Handle(_time);
+            break;
+        default:
+            Animation::Handle(_time);
+            break;
+    }
+}
 
 void setup()
 {
     Serial.begin(SERIAL_SPEED);
-    Serial.println("Booting...");
+    Serial.println("Booting");
 
     pinMode(DISPLAY_LED_PIN, OUTPUT);
     pinMode(LDR_PIN, INPUT);
-    
-    // Calculate frame duration (in milliseconds) once, so we don't need to keep doing this
+    pinMode(BUTTON_EFFECTS, INPUT_PULLUP);
+
+    // Calculate frame duration (in milliseconds) once
     _frameduration = 1000 / CLOCK_FPS;
 
     StatusBar::Initialize();
@@ -35,26 +93,14 @@ void setup()
     OTA::Initialize();
     // Temperature::Initialize(TEMPERATURE_XOFF, TEMPERATURE_YOFF, TEMPERATURE_COLD_COLOR, TEMPERATURE_WARM_COLOR);
 
-    // Effects:
-
-    // SolidColor::Initialize(CRGB(40,10,0));
-    // Rainbow::Initialize(128, 25);
-    // Gradient::Initialize(CRGB(255, 0, 0), CRGB(0, 255, 0));
-    
-    // Example animations
-    // Animation::Initialize("http://xs4any.nl/marios/fire.bin");
-    // Animation::Initialize("http://xs4any.nl/marios/spiral.bin");
-    // Animation::Initialize("http://xs4any.nl/marios/testscreen.bin");
-    // Animation::Initialize("http://xs4any.nl/marios/mario.bin");
-    // Animation::Initialize("http://xs4any.nl/marios/hearts.bin");
-    // Animation::Initialize("http://xs4any.nl/marios/fireworks.bin");
-    // Animation::Initialize("http://xs4any.nl/marios/matrix.bin");
-    
+    seteffect(_effect);
     // StatusBar::Disable();
 }
 
 void loop()
 {
+    OTA::Handle();
+
     // Split time parts of last time into low/high DWORDS
     uint32_t time_l = _time.uptime >> 32;
     uint32_t time_h = _time.uptime;
@@ -70,15 +116,15 @@ void loop()
     // Store current time in seconds since epoch
     _time.time = NTPClock::Now();
 
-    // Main loop
-    OTA::Handle();
+    // Change effect?
+    if (digitalRead(D6) == 0) {
+        seteffect(++_effect);
+        delay(300);
+    }
 
-    // Effects:
-    // Animation::Handle(_time);
-    // SolidColor::Handle(_time);
-    // Rainbow::Handle(_time);
-    // Gradient::Handle(_time);
-    
+    // Effect
+    handleeffect(_effect);    
+
     // Actual time
     Clock::Handle(_time);
     // Temperature::Handle(_time);
